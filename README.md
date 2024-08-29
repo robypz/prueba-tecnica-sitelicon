@@ -16,6 +16,7 @@ Para correr el proyecto
         <li>php artisan migrate</li>
         <li>composer npm install</li>
         <li>composer npm run build</li>
+        <li>php -S localhost:8000 -t public</li>
     </ul>
 </li>
 <li>Registrarse Loguearse</li>
