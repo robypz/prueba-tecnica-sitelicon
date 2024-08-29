@@ -6,7 +6,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use Illuminate\Support\Facades\Auth;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Srmklive\PayPal\Services\PayPal;
 
 class OrderController extends Controller
 {
@@ -16,16 +16,13 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('order.index',compact('orders'));
+        return view('order.index', compact('orders'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -38,12 +35,12 @@ class OrderController extends Controller
         $order->status = 'pending';
         $order->save();
 
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $token = $provider->getAccessToken();
-        $provider->setAccessToken($token);
+        $paypal = new PayPal;
+        $paypal->setApiCredentials(config('paypal'));
+        $token = $paypal->getAccessToken();
+        $paypal->setAccessToken($token);
 
-        $response = $provider->createOrder([
+        $response = $paypal->createOrder([
             "intent" => "CAPTURE",
             "purchase_units" => [
                 [

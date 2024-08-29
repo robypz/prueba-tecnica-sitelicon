@@ -27,10 +27,12 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <a href="{{route('order.index')}}" class="nav-link">Ordenes</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
